@@ -1,36 +1,61 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
-        <!-- Reemplazar por los datos que correspondan -->
-        <title>Programación I | Parcial 2 | APELLIDO/S</title>
+        <title>Programación I | Parcial 2 | Rodríguez, Juan Cruz</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
         <link rel="shortcut icon" href="favicon.ico" />
-        <link rel="stylesheet" href="styles.css" />
-        <script src="index.js"></script>
+        <link rel="stylesheet" href="styles/styles.css" />
     </head>
     <body>
         <header>
-            <!-- Reemplazar por los datos que correspondan -->
-            <h1>Programación I | Parcial 2 | APELLIDO/S | Mi carrito</h1>
+            <h1>Programación I | Parcial 2 | Rodríguez, Juan Cruz | Mi carrito</h1>
+            <!-- Carrito -->
+            <div id="carrito">
+                <p><span id="items-carrito" class="cantidad">0</span> ítems agregados</p>
+                <p>Total: $<span id="total-carrito" class="total">0</span></p>
+                <button id="ver-carrito">Ver carrito</button>
+            </div>
         </header>
         <main>
-            <!-- Este es un ejemplo de contenedor de carrito -->
-            <div id="carrito">
-                <p><span>0</span> ítems agregados</p>
-                <p>$<span>0</span> es el total</p>
-                <!-- Estos filtros pueden ser links, botones, menu desplegable. Sugiero generarlos dinamicamente -->
-                <p>Filtrar por <a href="#">Categoría 1</a> | <a href="#">Categoría 2</a> | <a href="#">Categoría 3</a></p>
-                <button>Ver carrito</button>
-            </div>
-            <h2>Productos</h2>
-            
-            <div id="productos">
-                <!-- Aca irian los productos -->
+            <div id="filtrar-ordenar">
+                <!-- Filtrar -->
+                <div id="filtrar">
+                    <p>Filtrar por</p>
+                    <select id="filtrar-por">
+                        <option value="todos">Todos</option>
+                        <option value="Auriculares">Auriculares</option>
+                        <option value="Camaras">Cámaras</option>
+                        <option value="Teclados">Teclados</option>
+                    </select>
+                </div>
+                
+                <!-- Ordenar -->
+                <div id="ordenar">
+                    <p>Ordenar por</p>
+                    <select id="ordenar-por">
+                        <option value="relevancia">Más relevante</option>
+                        <option value="precio-ascendente">Precio (menor a mayor)</option>
+                        <option value="precio-descendente">Precio (mayor a menor)</option>
+                    </select>
+                </div>
             </div>
 
+            <section id="productos"></section>
+
+            <!-- Modal Carrito -->
+            <div id="modal-carrito" class="modal">
+                <div class="modal-contenido">
+                    <h2>Detalle del Carrito</h2>
+                    <ul id="contenido-carrito"></ul>
+                    <p id="monto-total">Total: $0.00</p>
+                    <div id="botones-modal">
+                        <button id="vaciar-carrito">Vaciar Carrito</button>
+                        <button id="cerrar-modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
         </main>
-
         <footer>
             <ul>
                 <li>Profesor Fabrizio Carlassara</li>
@@ -39,11 +64,11 @@
                 </li>
                 <li>Programación 1</li>
                 <li>
-                    <!-- Reemplazar por el link del repositorio de GitHub -->
-                    <a href="#">URL del repo de GitHub</a>
+                    <a target="_blank" href="https://github.com/JuanCruzRodriguez/p1-parcial-2">URL del repo de GitHub</a>
                 </li>
             </ul>
+            <p>© Copyright | Juan Cruz Rodríguez</p>
         </footer>
-        
-    </body>
+    <script src="scripts/index.js"></script>
+</body>
 </html>
