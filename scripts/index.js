@@ -101,7 +101,7 @@ class Carrito {
             this.productos.forEach(producto => {
                 const itemCarrito = document.createElement('li');
                 
-                // Productos en carrito
+                // Productos agregados al carrito
                 const nombre = document.createElement('h2');
                 nombre.textContent = producto.nombre;
 
@@ -140,8 +140,8 @@ const carrito = new Carrito();
 // Mostrar el modal 
 document.getElementById('ver-carrito').addEventListener('click', () => {
     const modal = document.getElementById('modal-carrito');
-    modal.style.display = 'flex'; // Abrir el modal
-    carrito.actualizarCarrito(); // Actualizar los productos y el total en el modal
+    modal.style.display = 'flex'; 
+    carrito.actualizarCarrito(); 
 });
 
 // Cerrar el modal
@@ -151,7 +151,7 @@ document.getElementById('cerrar-modal').addEventListener('click', () => {
 
 // Vaciar el carrito
 document.getElementById('vaciar-carrito').addEventListener('click', () => {
-    carrito.vaciarCarrito(); // Vaciar el carrito y actualizar la vista
+    carrito.vaciarCarrito();
 });
 
 // Cargar productos
@@ -207,25 +207,45 @@ let ordenActual = true; // Esta variable guarda el orden actual
 document.getElementById('filtrar-por').addEventListener('change', (e) => {
     const categoria = e.target.value;
     if (categoria === 'todos') {
-        productosFiltrados = productos; // No se filtra, se muestran todos los productos
+        productosFiltrados = productos;
     } else {
         productosFiltrados = productos.filter(producto => producto.categoria === categoria);
     }
-    // Aplicar el orden después de filtrar
-    ordenarPorPrecio(ordenActual);
+
+    // Aplicar el orden actual después de filtrar
+    if (ordenActual === 'precio-ascendente') {
+        ordenarPorPrecio(true);
+    } else if (ordenActual === 'precio-descendente') {
+        ordenarPorPrecio(false);
+    } else {
+        ordenarPorRelevancia();
+    }
 });
 
-// Ordenar productos por precio
+// Ordenar productos por...
 document.getElementById('ordenar-por').addEventListener('change', (e) => {
     const orden = e.target.value;
-    ordenActual = orden === 'precio-ascendente'; // Actualizar el orden ascendente o descendente
-    ordenarPorPrecio(ordenActual); // Aplicar el orden
+    ordenActual = orden; // Actualizar a orden actual
+
+    if (orden === 'precio-ascendente') {
+        ordenarPorPrecio(true);
+    } else if (orden === 'precio-descendente') {
+        ordenarPorPrecio(false);
+    } else if (orden === 'mas-relevante') {
+        ordenarPorRelevancia();
+    }
 });
 
-// Ordenar los productos filtrados
+// Ordenar los productos por precio
 function ordenarPorPrecio(ascendente = true) {
     productosFiltrados.sort((a, b) => (ascendente ? a.precio - b.precio : b.precio - a.precio));
-    cargarProductos(productosFiltrados); // Cargar productos ya ordenados
+    cargarProductos(productosFiltrados); // Cargar productos ordenados
+}
+
+// Ordenar los productos por mayor relevancia (se hace por orden de ID ascendente)
+function ordenarPorRelevancia() {
+    productosFiltrados.sort((a, b) => a.id - b.id);
+    cargarProductos(productosFiltrados); // Cargar productos ordenados
 }
 
 // Cargar productos al iniciar
